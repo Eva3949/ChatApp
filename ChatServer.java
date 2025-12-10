@@ -95,6 +95,18 @@ public class ChatServer {
             }
         }
 
+        private void broadcast(String message) {
+            for (PrintWriter writer : clients.values()) {
+                writer.println(message);
+            }
+        }
         
+        private void broadcastUserList() {
+            StringBuilder sb = new StringBuilder("USERLIST");
+            for (String user : clients.keySet()) {
+                sb.append(",").append(user);
+            }
+            broadcast(sb.toString());
+        }
     }
 }
